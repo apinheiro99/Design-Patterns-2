@@ -48,6 +48,11 @@ class Contrato():
             )
         )
 
+    def restaura_estado(self, estado):
+        self.__data = estado.contrato.data
+        self.__cliente = estado.contrato.cliente
+        self.__tipo = estado.contrato.tipo
+
 class Estado():
 
     def __init__(self, contrato):
@@ -94,3 +99,9 @@ if __name__ == "__main__":
     print (contrato.tipo)
 
     historico.adiciona_estado(contrato.salva_estado())
+
+    contrato.restaura_estado(historico.obtem_estado(1))
+    print (contrato.tipo)
+
+    contrato.restaura_estado(historico.obtem_estado(0))
+    print (contrato.tipo)
