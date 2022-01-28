@@ -38,3 +38,13 @@ class Contrato():
             self.__tipo = "ACERTADO"
         elif self.__tipo == "ACERTADO":
             self.__tipo = "CONCLUIDO"
+
+class Estado():
+
+    def __init__(self, contrato):
+        self.__contrato = contrato
+
+    @property
+    def contrato(self):
+        return self.__contrato
+        
