@@ -60,4 +60,18 @@ class Historico():
 
     def adiciona_estado(self, estado):
         self.__estados_salvos.append(estado)
-        
+
+if __name__ == "__main__":
+
+    historico = Historico()
+
+    contrato = Contrato(
+        data = date.today(),
+        cliente = "Flavio Almeida",
+        tipo = "NOVO"
+    )
+
+    print (contrato.tipo)
+    
+    contrato.avanca()
+    print (contrato.tipo)
