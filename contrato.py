@@ -1,7 +1,5 @@
 from datetime import date
 
-from importlib_metadata import re
-
 class Contrato():
 
     def __init__(self, data, cliente, tipo):
