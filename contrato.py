@@ -1,5 +1,7 @@
 from datetime import date
 
+from importlib_metadata import re
+
 class Contrato():
 
     def __init__(self, data, cliente, tipo):
@@ -47,4 +49,15 @@ class Estado():
     @property
     def contrato(self):
         return self.__contrato
+
+class Historico():
+
+    def __init__(self):
+        self.__estados_salvos = []
+
+    def obtem_estado(self, indice):
+        return self.__estados_salvos[indice]
+
+    def adiciona_estado(self, estado):
+        self.__estados_salvos.append(estado)
         
