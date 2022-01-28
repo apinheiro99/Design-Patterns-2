@@ -1,7 +1,5 @@
 from datetime import date
 
-from importlib_metadata import re
-
 class Contrato():
 
     def __init__(self, data, cliente, tipo):
@@ -41,6 +39,15 @@ class Contrato():
         elif self.__tipo == "ACERTADO":
             self.__tipo = "CONCLUIDO"
 
+    def salva_estado(self):
+        return Estado(
+            Contrato(
+                data = self.__data,
+                cliente = self.__cliente,
+                tipo = self.__tipo
+            )
+        )
+
 class Estado():
 
     def __init__(self, contrato):
@@ -75,3 +82,15 @@ if __name__ == "__main__":
     
     contrato.avanca()
     print (contrato.tipo)
+
+    historico.adiciona_estado(contrato.salva_estado())
+
+    contrato.avanca()
+    print (contrato.tipo)
+
+    historico.adiciona_estado(contrato.salva_estado())
+
+    contrato.avanca()
+    print (contrato.tipo)
+
+    historico.adiciona_estado(contrato.salva_estado())
