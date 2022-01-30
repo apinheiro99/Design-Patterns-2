@@ -43,3 +43,23 @@ class Test_aulas(TestCase):
         contrato.restaura_estado(historico.obtem_estado(0))
         print (contrato.tipo)
         self.assertEqual(contrato.tipo, "EM ANDAMENTO")
+
+    def test_Classe_Soma(self):
+        from operacoes import Soma, Numero
+
+        expressao_esquerda = Soma(Numero(10), Numero(20))
+        expressao_direita = Soma(Numero(5), Numero(2))
+        expressao_conta = Soma (expressao_esquerda, expressao_direita)
+        print (expressao_conta.avalia())
+
+        self.assertEqual(expressao_conta.avalia(), 37)
+
+    def test_Classe_Subtracao(self):
+        from operacoes import Subtracao, Numero
+
+        expressao_esquerda = Subtracao(Numero(10), Numero(20))
+        expressao_direita = Subtracao(Numero(5), Numero(2))
+        expressao_conta = Subtracao(expressao_esquerda, expressao_direita)
+        print (expressao_conta.avalia())
+
+        self.assertEqual(expressao_conta.avalia(), -13)
