@@ -1,3 +1,4 @@
+from asyncore import file_dispatcher
 from datetime import date
 
 class Pedido():
@@ -30,17 +31,27 @@ class Pedido():
     def data_finalizacao(self):
         return self.__data_finalizacao
 
-from abc import ABCMeta, abstractmethod
-class Comando(ABCMeta):
+from abc import ABC, abstractmethod
+class Comando(ABC):
+
     @abstractmethod
     def executa(self):
         pass
 
-class Conclui_pedido(Comando):
+class Finaliza_pedido(Comando):
     def __init__(self, pedido):
         self.__pedido = pedido
 
-        
+    def executa(self):
+        self.__pedido.finaliza()
+
+class Paga_pedido(Comando):
+    def __init__(self, pedido):
+        self.__pedido = pedido
+
+    def executa(self):
+        self.__pedido.paga()
+
 class Fila_de_trabalho():
     def __init__(self):
         self.__comandos = []
@@ -51,3 +62,23 @@ class Fila_de_trabalho():
     def processa(self):
         for comando in self.__comandos:
             comando.executa()
+
+if __name__ == "__main__":
+
+    pedido1 = Pedido("Flavio", 200)
+    pedido2 = Pedido("Almeida", 400)
+
+    fila_de_trabalho = Fila_de_trabalho()
+
+    comando1 = Finaliza_pedido(pedido1)
+    comando2 = Paga_pedido(pedido1)
+    comando3 = Finaliza_pedido(pedido2)
+
+    fila_de_trabalho.adiciona(comando1)
+    fila_de_trabalho.adiciona(comando2)
+    fila_de_trabalho.adiciona(comando3)
+
+    fila_de_trabalho.processa()
+
+    print(pedido1.status)
+    print(pedido2.status)
