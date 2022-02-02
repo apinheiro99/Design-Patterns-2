@@ -135,3 +135,24 @@ class Test_aulas(TestCase):
         impressao = Impressao()
         expressao_conta.aceita(impressao)
         self.assertEqual(impressao.expressao, "(((10-20)+(5-2))+((11+22)-(3+7)))")
+
+    def test_Classe_Pedido(self):
+        from pedido import Pedido, Fila_de_trabalho,Finaliza_pedido, Paga_pedido
+
+        pedido1 = Pedido("Flavio", 200)
+        pedido2 = Pedido("Almeida", 400)
+
+        fila_de_trabalho = Fila_de_trabalho()
+
+        comando1 = Finaliza_pedido(pedido1)
+        comando2 = Paga_pedido(pedido1)
+        comando3 = Finaliza_pedido(pedido2)
+
+        fila_de_trabalho.adiciona(comando1)
+        fila_de_trabalho.adiciona(comando2)
+        fila_de_trabalho.adiciona(comando3)
+
+        fila_de_trabalho.processa()
+
+        self.assertEqual(pedido1.status, "PAGO")
+        self.assertEqual(pedido2.status, "ENTREGUE")
