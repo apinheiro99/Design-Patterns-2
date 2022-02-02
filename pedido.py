@@ -36,6 +36,11 @@ class Comando(ABCMeta):
     def executa(self):
         pass
 
+class Conclui_pedido(Comando):
+    def __init__(self, pedido):
+        self.__pedido = pedido
+
+        
 class Fila_de_trabalho():
     def __init__(self):
         self.__comandos = []
